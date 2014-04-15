@@ -1,0 +1,12 @@
+Package: PerFit
+Type: Package
+Title: Person Fit
+Version: 1.0
+Date: 2014-03-21
+Author: Jorge N. Tendeiro
+Maintainer: Jorge N. Tendeiro <j.n.tendeiro@rug.nl>
+Description: PerFit contains several person fit indices that allow assessing whether
+  individual response patterns to tests or questionnaires are (im)plausible given 
+  the other respondents in the sample or a specified Item Response Theory model.
+Depends: ltm, irtoys
+License: GPL (>=2)
