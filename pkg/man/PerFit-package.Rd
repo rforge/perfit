@@ -45,6 +45,15 @@ The package provides other functions that help analyzing the data when conductin
 }
 
 More person-fit indices will be added to the package in future updates.
+
+\bold{Versions}
+\itemize{
+\item Version 1.0 (April 2014)
+\item Version 1.1 (May 2014)
+
+Functions \code{plot.PerFit} and \code{PRFplot} now allow the user to edit the axes labels and the titles.
+}
+
 }
 \author{
 Jorge N. Tendeiro

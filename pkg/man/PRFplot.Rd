@@ -4,8 +4,9 @@
 \title{Person response function (PRF)}
 \description{Plot the nonparametric person response function with variability bands.}
 \usage{
-PRFplot(matrix, respID, h = 0.09, N.FPts = 101, VarBands = TRUE,
- VarBands.area = TRUE, alpha = 0.05)
+PRFplot(matrix, respID, h = 0.09, N.FPts = 101, VarBands = FALSE,
+ VarBands.area = FALSE, alpha = 0.05,
+ Xlabel=NA,Xcex=1.5,Ylabel=NA,Ycex=1.5,title=NA,Tcex=1.5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,9 +15,15 @@ PRFplot(matrix, respID, h = 0.09, N.FPts = 101, VarBands = TRUE,
 }
   \item{h}{Bandwidth value. Default is 0.09.}
   \item{N.FPts}{Number of (equidistant) focal points in the [0,1] interval. Default is 101.}
-  \item{VarBands}{Logical: Draw the \code{(1-alpha)} variability bands? Default is \code{TRUE}.}
-  \item{VarBands.area}{Logical: Draw the area between the \code{(1-alpha)} variability bands? Default is \code{TRUE}.}
+  \item{VarBands}{Logical: Draw the \code{(1-alpha)} variability bands? Default is \code{FALSE}.}
+  \item{VarBands.area}{Logical: Draw the area between the \code{(1-alpha)} variability bands? Default is \code{FALSE}.}
   \item{alpha}{Significance level for the variability bands. Default is 0.05.}
+  \item{Xlabel}{Define label of x-axis, otherwise a default label is shown.}
+  \item{Xcex}{Font size of the label of x-axis.}
+  \item{Ylabel}{Define label of y-axis, otherwise a default label is shown.}
+  \item{Ycex}{Font size of the label of y-axis.}
+  \item{title}{Define the title of the plot, otherwise a default title is shown.}
+  \item{Tcex}{Font size of the title of the plot.}
 }
 \details{This function plots the so-called nonparametric person response function (PRF; Emons, Sijtsma, and Meijer, 2004; Sijtsma and Meijer, 2001) for respondent \code{respID}. The PRF relates item difficulty (0-1 range on the x-axis) with the associated probability of correct response (on the y-axis). The PRF is typically nonincreasing, implying that the probability of answering increasingly difficult items should (at least) not increase.
 

@@ -45,7 +45,8 @@ cutoff <- function(x,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA) { 
 }
 
 # Define plot() function for class "PerFit":
-plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA,...) { #x = an object from 'PerFit' class
+plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA,
+                         Xlabel=NA,Xcex=1.5,title=NA,Tcex=1.5,...) { #x = an object from 'PerFit' class
   upp.ind <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
   low.ind <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
   cutoff.res <- cutoff(x,method,Qlvl,Blvl,Breps,UDlvl);
@@ -80,14 +81,18 @@ plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Qu
     points(density(x$PFscores),type="l",lwd=2,ann=FALSE,ylim=c(0,ymax))}
   box(col="black")
   #
-  if (cutoff == FALSE) {mtext(side=1,text=x$PFindex,line=2.5,col="black",cex=1.5,font=1)}
+  if (cutoff == FALSE) {
+    tmp <- if (is.na(Xlabel)) {x$PFindex} else {Xlabel};
+    mtext(side=1,text=tmp,line=2.5,col="black",cex=1.5,font=1)}
   #
   if (cutoff == TRUE) {
     abline(v=x.line,lwd=2)
-    mtext(side=1,text=paste(x$PFindex," (cutoff=",round(x.line,3),direction,perc.flagged,"%)",sep=""),line=2.5,col="black",cex=1.5,font=1) 
+    tmp <- if (is.na(Xlabel)) {paste(x$PFindex," (cutoff=",round(x.line,3),direction,perc.flagged,"%)",sep="")} else {Xlabel};
+    mtext(side=1,text=tmp,line=2.5,col="black",cex=Xcex,font=1) 
   }
   #
-  mtext(side=3,text="Distribution",line=.5,col="black",cex=1.5,font=2)
+  tmp <- if (is.na(title)) {"Distribution"} else {title};
+  mtext(side=3,text=tmp,line=.5,col="black",cex=Tcex,font=2)
 }
 
 flagged.resp <- function(matrix,scores=TRUE,ord=TRUE,x,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA) { # matrix = score matrix

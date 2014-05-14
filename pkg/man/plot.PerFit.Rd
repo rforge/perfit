@@ -4,7 +4,8 @@
 \title{Plot method for objects of class "PerFit"}
 \description{Plot method for objects of class "PerFit".}
 \usage{\method{plot}{PerFit}(x, type = "Density", both.scale = TRUE, cutoff = TRUE, method = "Quantile", 
- Qlvl = 0.05, Blvl = 0.05, Breps = 1000, UDlvl = NA,...)}
+ Qlvl = 0.05, Blvl = 0.05, Breps = 1000, UDlvl = NA,
+ Xlabel=NA,Xcex=1.5,title=NA,Tcex=1.5,...)}
 \arguments{
   \item{x}{Object of class "PerFit".}
   \item{type}{Type of plot: \code{"Histogram"}, \code{"Density"} (default), \code{"Both"}.}
@@ -15,6 +16,10 @@
   \item{Blvl}{Bootstrap level (value between 0 and 1), only used when \code{method="Bootstrap"}. Default is 0.05.}
   \item{Breps}{Number of bootstrap resamples, only used when \code{method="Bootstrap"}. Default is 1000.}
   \item{UDlvl}{User-defined level, only used when \code{method="UserDefined"}.}
+  \item{Xlabel}{Define label of x-axis, otherwise a default label is shown.}
+  \item{Xcex}{Font size of the label of x-axis.}
+  \item{title}{Define the title of the plot, otherwise a default title is shown.}
+  \item{Tcex}{Font size of the title of the plot.}
   \item{...}{Extra graphical parameters to be passed to \code{plot}.}
 }
 \details{
