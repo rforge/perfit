@@ -1,7 +1,7 @@
 \name{flagged.resp}
 \alias{flagged.resp}
 \title{Find (potentially) aberrant response patterns}
-\description{Find which respondents in the sample were flagged by the specified person-fit index.}
+\description{Find which respondents in the sample were flagged by the specified person-fit statistic.}
 \usage{
 flagged.resp(matrix, scores = TRUE, ord = TRUE, x, method = "Quantile", 
  Qlvl = 0.05, Blvl = 0.05, Breps = 1000, UDlvl = NA)
@@ -18,7 +18,7 @@ flagged.resp(matrix, scores = TRUE, ord = TRUE, x, method = "Quantile",
   \item{Breps}{Number of bootstrap resamples, only used when \code{method="Bootstrap"}. Default is 1000.}
   \item{UDlvl}{User-defined level, only used when \code{method="UserDefined"}.}
 }
-\details{This function finds the respondents in the dataset that were flagged by the person-fit index. This index is specified by means of the "PerFit" class object \code{x}. 
+\details{This function finds the respondents in the dataset that were flagged by the person-fit statistic. This statistic is specified by means of the "PerFit" class object \code{x}. 
 
 The cutoff score is internally computed, for which the user may define \code{method}, \code{Qlvl}, \code{Blvl}, \code{Breps}, and \code{UDlvl} accordingly (see \code{\link{cutoff}}).
 
@@ -27,7 +27,7 @@ If \code{scores=TRUE} then the respondents' item scores will be shown in the out
 \value{
 If \code{scores=FALSE} the output is a matrix with two columns:
   \item{\code{FlaggedID} }{Row index identifying the flagged respondents.}
-  \item{\code{PFscores} }{The values of the person-fit index.}
+  \item{\code{PFscores} }{The values of the person-fit statistic.}
 If \code{scores=TRUE} the output is a list with two elements:
   \item{\code{Scores} }{Matrix with columns: \code{FlaggedID}, item scores (\code{It**}), and \code{PFscores}.}
   \item{\code{MeanItemValue} }{The items' mean value (which is nothing more than the proportion-correct for dichotomous items).}

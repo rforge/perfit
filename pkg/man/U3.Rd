@@ -1,8 +1,8 @@
 \name{U3, ZU3}
 \alias{U3}
 \alias{ZU3}
-\title{U3, ZU3 person-fit indices}
-\description{van der Flier's U3 and ZU3 person-fit indices.}
+\title{U3, ZU3 person-fit statistics}
+\description{van der Flier's U3 and ZU3 person-fit statistics.}
 \usage{
 U3(matrix)
 
@@ -12,7 +12,7 @@ ZU3(matrix)
   \item{matrix}{A data matrix of dichotomous item scores: Persons as rows, items as columns, item scores are either 0 or 1, no missing data.}
 }
 \details{
-Suppose the items are ordered in decreasing proportion-correct score, \eqn{p_1>p_2>\ldots>p_I}{p1>p2>...>pI} (\eqn{I} = number of items). Given response vector \eqn{(X_1,X_2,\ldots,X_I)}{(X1,X2,...,XI)} with total score \eqn{S=\sum_iX_i}{S=sum(Xi; i=1,...,I)}, van der Flier (1980, 1982) defined the U3 index as
+Suppose the items are ordered in decreasing proportion-correct score, \eqn{p_1>p_2>\ldots>p_I}{p1>p2>...>pI} (\eqn{I} = number of items). Given response vector \eqn{(X_1,X_2,\ldots,X_I)}{(X1,X2,...,XI)} with total score \eqn{S=\sum_iX_i}{S=sum(Xi; i=1,...,I)}, van der Flier (1980, 1982) defined the U3 statistic as
 \deqn{\frac{\sum_{i=1}^S p_i-\sum_{i=1}^I p_i}{\sum_{i=1}^S p_i-\sum_{i=I-S+1}^I p_i}.}{
 [sum(pi; i=1,...,S) - sum(pi; i=1,...,I)] / [sum(pi; i=1,...,S) - sum(pi; i=I-S+1,...,I)].}
 
@@ -24,8 +24,8 @@ Response vectors (i.e., rows of \code{matrix}) that only consist of 0s or 1s nee
 }
 \value{
 An object of class "PerFit", which is a list with elements:
-  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit index.}
-  \item{PFindex}{The name of the person-fit index used.}
+  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit statistic.}
+  \item{PFstatistic}{The name of the person-fit statistic used.}
 }
 \references{
 Emons, W. M., Meijer, R. R., and Sijtsma, K. (2002). Comparing simulated and theoretical sampling distributions of the U3 person-fit statistic. \emph{Applied Psychological Measurement}, \bold{26(1)}, 88--108.

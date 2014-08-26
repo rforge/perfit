@@ -3,21 +3,21 @@
 \alias{PerFit}
 \docType{package}
 \title{Person Fit}
-\description{Person fit consists of a set of techniques aimed at detecting unusual responses to tests or questionnaires. There are several person-fit indices available in the literature, see Karabatsos (2003) and Meijer and Sijtsma (2001) for comprehensive reviews. Both dichotomous and polytomous types of items are considered. This R-package outputs the values of the chosen person-fit index, the IDs of the respondents that were flagged according to some criterion (based on empirical quantiles, on critical values stipulated by the user, or on critical values estimated using bootstrapping), and plots the sample distribution of the scores of the person-fit index. Nonparametric person response functions (Sijtsma and Meijer, 2001) may also be requested in order to help interpreting individual answering behaviors (dichotomous data only).
+\description{Person fit consists of a set of techniques aimed at detecting unusual responses to tests or questionnaires. There are several person-fit statistics available in the literature, see Karabatsos (2003) and Meijer and Sijtsma (2001) for comprehensive reviews. Both dichotomous and polytomous types of items are considered. This R-package outputs the values of the chosen person-fit statistic, the IDs of the respondents that were flagged according to some criterion (based on empirical quantiles, on critical values stipulated by the user, or on critical values estimated using bootstrapping), and plots the sample distribution of the scores of the person-fit statistic. Nonparametric person response functions (Sijtsma and Meijer, 2001) may also be requested in order to help interpreting individual answering behaviors (dichotomous data only).
 }
 \details{
 \tabular{ll}{
 Package: \tab PerFit\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-03-21\cr
+Version: \tab 1.2\cr
+Date: \tab 2014-08-26\cr
 License: \tab GPL Version 2 or later\cr
 }
 The \pkg{PerFit} package contains several person-fit functions. The goal is to detect response vectors that seem to be strange in terms of the sample of respondents or in terms to an item response theory (IRT) model.
 
-There are many person-fit indices available in the literature. Indices are typically categorized according to the type of items (Dicho = dichotomous, Poly = polytomous) and the type of IRT model (NParam=nonparametric, Param=parametric) that they apply to. The current version of \pkg{PerFit} includes the following indices:
+There are many person-fit statistics available in the literature. Statistics are typically categorized according to the type of items (Dicho = dichotomous, Poly = polytomous) and the type of IRT model (NParam=nonparametric, Param=parametric) that they apply to. The current version of \pkg{PerFit} includes the following statistics:
 \tabular{llcc}{
-\bold{Person-fit index (R function)}  \tab \bold{Reference}      \tab \bold{Type item} \tab \bold{Type IRT model}\cr
+\bold{Person-fit statistic (R function)}  \tab \bold{Reference}      \tab \bold{Type item} \tab \bold{Type IRT model}\cr
 \code{\link{r.pbis}}        \tab Donlon and Fisher (1968)             \tab Dicho            \tab NParam\cr
 \code{\link{C.Sato}}        \tab Sato (1975)                          \tab Dicho            \tab NParam\cr
 \code{\link{G}}, \code{\link{Gnormed}} \tab van der Flier (1977), Meijer (1994)  \tab Dicho            \tab NParam\cr
@@ -33,18 +33,18 @@ There are many person-fit indices available in the literature. Indices are typic
 \code{\link{lzstar}}        \tab Snijders (2001)                      \tab Dicho            \tab Param\cr
 \code{\link{U3poly}}        \tab Emons (2008)                         \tab Poly             \tab NParam\cr
 }
-All functions above have an output of class \code{PerFit}, which is a list containing a vector with the computed person-fit scores (\code{PFscores}) and the name of the index used (\code{PFindex}).
+All functions above have an output of class \code{PerFit}, which is a list containing a vector with the computed person-fit scores (\code{PFscores}) and the name of the statistic used (\code{PFstatistic}).
 
 The package provides other functions that help analyzing the data when conducting person-fit analyses:
 \tabular{ll}{
 \bold{Function}                           \tab \bold{Description}\cr
-\code{\link{cutoff}}                      \tab Estimate cutoff values for the person-fit indices, to be used as decision rules.\cr
+\code{\link{cutoff}}                      \tab Estimate cutoff values for the person-fit statistics, to be used as decision rules.\cr
 \code{\link{flagged.resp}}                \tab Identify which respondents were flagged according to the chosen cutoff.\cr
 \code{\link{plot}} (class \code{PerFit})  \tab Plot the distribution of person-fit scores with the cutoff superimposed.\cr
 \code{\link{PRFplot}}                     \tab Plot the nonparametric person response function (Sijtsma and Meijer, 2001).
 }
 
-More person-fit indices will be added to the package in future updates.
+More person-fit statistics will be added to the package in future updates.
 
 \bold{Versions}
 \itemize{

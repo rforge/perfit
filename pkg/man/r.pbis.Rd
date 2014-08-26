@@ -1,7 +1,7 @@
-\name{Personal biserial index}
+\name{Personal biserial statistic}
 \alias{r.pbis}
-\title{Personal biserial index}
-\description{Donlon and Fischer's personal biserial index.}
+\title{Personal biserial statistic}
+\description{Donlon and Fischer's personal biserial statistic.}
 \usage{r.pbis(matrix)}
 \arguments{
   \item{matrix}{A data matrix of dichotomous item scores: Persons as rows, items as columns, item scores are either 0 or 1, no missing data.}
@@ -13,8 +13,8 @@ Response vectors (i.e., rows of \code{matrix}) that only consist of 0s or 1s nee
 }
 \value{
 An object of class "PerFit", which is a list with elements:
-  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit index.}
-  \item{PFindex}{The name of the person-fit index used.}
+  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit statistic.}
+  \item{PFstatistic}{The name of the person-fit statistic used.}
 }
 \references{
 Donlon, T. F., and Fischer, F. E. (1968) An index of an individual's agreement with group-defined item difficulties. \emph{Educational and Psychological Measurement}, \bold{28(1)}, 105--113.

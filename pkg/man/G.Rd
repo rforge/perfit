@@ -2,7 +2,7 @@
 \alias{G}
 \alias{Gnormed}
 \title{Number of Guttman errors}
-\description{van der Flier's indices based on the number of Guttman errors.}
+\description{van der Flier's statistics based on the number of Guttman errors.}
 \usage{
 G(matrix)
 
@@ -16,12 +16,12 @@ Consider the items' proportion-correct scores, \eqn{p_1,p_2,\ldots,p_I}{p1,p2,..
 
 \code{G} counts the number of (0,1) pairs given that the items are ordered in decreasing proportion-correct scores order. However, \code{G} depends on the total number of items for a given number-correct score. In particular, for a number-correct \eqn{S}, \code{G} has maximum equal to \eqn{S(I-S)}. \code{Gnormed} was created to bound \code{G} between 0 and 1 by dividing it by its maximum (conditional on the number-correct score). Hence, (potentially) aberrant response behavior is indicated by large values of G/Gnormed (i.e., in the right tail of the sampling distribution).
 
-\code{Gnormed} is perfectly linearly related to Tatsuoka and Tatsuoka's (1982, 1983) NCI index (\eqn{NCI = 1-2Gnormed}).
+\code{Gnormed} is perfectly linearly related to Tatsuoka and Tatsuoka's (1982, 1983) NCI statistic (\eqn{NCI = 1-2Gnormed}).
 }
 \value{
 An object of class "PerFit", which is a list with elements:
-  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit index.}
-  \item{PFindex}{The name of the person-fit index used.}
+  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit statistic.}
+  \item{PFstatistic}{The name of the person-fit statistic used.}
 }
 \references{
 Karabatsos, G. (2003) Comparing the Aberrant Response Detection Performance of Thirty-Six Person-Fit Statistics. \emph{Applied Measurement In Education}, \bold{16(4)}, 277--298.

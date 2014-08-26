@@ -1,8 +1,8 @@
 Package: PerFit
 Type: Package
 Title: Person Fit
-Version: 1.1
-Date: 2014-05-12
+Version: 1.2
+Date: 2014-08-26
 Author: Jorge N. Tendeiro
 Maintainer: Jorge N. Tendeiro <j.n.tendeiro@rug.nl>
 Description: PerFit contains several person fit indices that allow assessing whether

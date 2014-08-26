@@ -1,7 +1,7 @@
 \name{lzpoly}
 \alias{lzpoly}
-\title{lzpoly person-fit index}
-\description{Compute the lzpoly (Drasgow, Levine, and Williams, 1985) person-fit index.}
+\title{lzpoly person-fit statistic}
+\description{Compute the lzpoly (Drasgow, Levine, and Williams, 1985) person-fit statistic.}
 \usage{lzpoly(matrix,Ncat,ip = NA, model = "GRM", ability = NA, method = "EAP")}
 \arguments{
   \item{matrix}{A data matrix of polytomous item scores: Persons as rows, items as columns, item scores are integers between 0 and (Ncat-1), no missing data.
@@ -19,7 +19,7 @@
   \item{method}{Specify the method to use in order to estimate the latent ability parameters. The options available are \code{"EB"}, \code{"EAP"} (default), and \code{"MI"}.}
 }
 \details{
-Index \code{lzpoly} is the natural extension of \code{\link{lz}} to polytomously scores items. In this case the user can choose one from three possible IRT models to fit the data: The partial credit model (\code{model="PCM"}), the generalized partial credit model (\code{model="GPCM"}), or the graded response model (\code{model="GRM"}). Ability parameters can be estimated by means of one of three methods: Empirical Bayes (\code{"EB"}), expected a posteriori (\code{"EAP"}), or multiple imputation (\code{"MI"}).
+Statistic \code{lzpoly} is the natural extension of \code{\link{lz}} to polytomously scores items. In this case the user can choose one from three possible IRT models to fit the data: The partial credit model (\code{model="PCM"}), the generalized partial credit model (\code{model="GPCM"}), or the graded response model (\code{model="GRM"}). Ability parameters can be estimated by means of one of three methods: Empirical Bayes (\code{"EB"}), expected a posteriori (\code{"EAP"}), or multiple imputation (\code{"MI"}).
 
 Both item and ability parameters may be provided as function parameters (\code{ip} and \code{ability}, respectively). If \code{ip} is provided then \code{ability} must also be provided. The reason is that the estimation of the ability parameters is done via the function \code{factor.scores} from the \pkg{ltm} package, and this procedure requires an object of a specific class (\code{gpcm} or \code{grm}) containing the estimated item parameters (i.e., providing a matrix of item parameters to \code{ip} is not sufficient).
 
@@ -27,8 +27,8 @@ Aberrant response behavior is (potentially) indicated by small values of lzpoly 
 }
 \value{
 An object of class "PerFit", which is a list with elements:
-  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit index.}
-  \item{PFindex}{The name of the person-fit index used.}
+  \item{PFscores }{A vector of length \eqn{N} (number of respondents) with the values of the person-fit statistic.}
+  \item{PFstatistic}{The name of the person-fit statistic used.}
 }
 \references{
 Drasgow, F., Levine, M. V., and Williams, E. A. (1985) Appropriateness measurement with polychotomous item response models and standardized indices. \emph{British Journal of Mathematical and Statistical Psychology}, \bold{38(1)}, 67--86.

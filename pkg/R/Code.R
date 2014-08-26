@@ -2,57 +2,57 @@ library(irtoys)
 
 # Determine cutoff for class "PerFit":
 cutoff <- function(x,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA) { #x = an object from 'PerFit' class
-  upp.ind <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
-  low.ind <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
+  upp.PFS <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
+  low.PFS <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
   if (method == "Quantile") {
     prop.flagged <- Qlvl;
-    if (any(x$PFindex == upp.ind)) {
-      direction <- "upper";
+    if (any(x$PFStatistic == upp.PFS)) {
+      tail <- "upper";
       Qlvl.use <- 1-Qlvl}
-    if (any(x$PFindex == low.ind)) {
-      direction <- "lower";
+    if (any(x$PFStatistic == low.PFS)) {
+      tail <- "lower";
       Qlvl.use <- Qlvl}    
     cutoff.use <- quantile(x$PFscores,probs=Qlvl.use);
   }
   #
   if (method == "Bootstrap") {
-    if (any(x$PFindex == upp.ind)) {
-      direction <- "upper";
+    if (any(x$PFStatistic == upp.PFS)) {
+      tail <- "upper";
       Blvl.use <- 1-Blvl}
-    if (any(x$PFindex == low.ind)) {
-      direction <- "lower";
+    if (any(x$PFStatistic == low.PFS)) {
+      tail <- "lower";
       Blvl.use <- Blvl}   
     Bvec <- c();
     for (i in 1:Breps){
       Bvec <- c(Bvec,quantile(sample(x$PFscores,size=length(x$PFscores),replace=TRUE),probs=Blvl.use))
     }
     cutoff.use <- median(Bvec);
-    if (any(x$PFindex == upp.ind)) {prop.flagged <- sum(x$PFscores >= cutoff.use) / length(x$PFscores)}
-    if (any(x$PFindex == low.ind)) {prop.flagged <- sum(x$PFscores <= cutoff.use) / length(x$PFscores)}
+    if (any(x$PFStatistic == upp.PFS)) {prop.flagged <- sum(x$PFscores >= cutoff.use) / length(x$PFscores)}
+    if (any(x$PFStatistic == low.PFS)) {prop.flagged <- sum(x$PFscores <= cutoff.use) / length(x$PFscores)}
   }
   #
   if (method == "UserDefined") {
     cutoff.use <- UDlvl;
-    if (any(x$PFindex == upp.ind)) {
+    if (any(x$PFStatistic == upp.PFS)) {
       prop.flagged <- sum(x$PFscores >= cutoff.use) / length(x$PFscores);
-      direction <- "upper"}
-    if (any(x$PFindex == low.ind)) {
+      tail <- "upper"}
+    if (any(x$PFStatistic == low.PFS)) {
       prop.flagged <- sum(x$PFscores <= cutoff.use) / length(x$PFscores);
-      direction <- "lower"}
+      tail <- "lower"}
   }
   #
-  list(cutoff=as.numeric(cutoff.use),prop.flagged=prop.flagged,direction=direction)
+  list(cutoff=as.numeric(cutoff.use),prop.flagged=prop.flagged,tail=tail)
 }
 
 # Define plot() function for class "PerFit":
 plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA,
                          Xlabel=NA,Xcex=1.5,title=NA,Tcex=1.5,...) { #x = an object from 'PerFit' class
-  upp.ind <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
-  low.ind <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
+  upp.PFS <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
+  low.PFS <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
   cutoff.res <- cutoff(x,method,Qlvl,Blvl,Breps,UDlvl);
   x.line <- cutoff.res$cutoff;
   perc.flagged <- round(100 * cutoff.res$prop.flagged,2);
-  direction <- paste(", ",cutoff.res$direction," ",sep="");
+  direction <- paste(", ",cutoff.res$tail," ",sep="");
   # Find correct scale for y-axis:
   ymax.hist <- max(hist(x$PFscores,plot=FALSE)$density);
   ymax.dens <- max(density(x$PFscores)$y);
@@ -64,8 +64,8 @@ plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Qu
   hist(x$PFscores,freq=FALSE,border="white",ann=FALSE,ylim=c(0,ymax));
   #
   if (cutoff == TRUE) {
-    if (any(x$PFindex == upp.ind)) {rect(x.line,0,par("usr")[2], par("usr")[4],col="lightpink1",border=NA)}
-    if (any(x$PFindex == low.ind)) {rect(par("usr")[1],0, x.line,par("usr")[4],col="lightpink1",border=NA)}
+    if (any(x$PFStatistic == upp.PFS)) {rect(x.line,0,par("usr")[2], par("usr")[4],col="lightpink1",border=NA)}
+    if (any(x$PFStatistic == low.PFS)) {rect(par("usr")[1],0, x.line,par("usr")[4],col="lightpink1",border=NA)}
   }
   #
   if (type == "Histogram") {
@@ -82,12 +82,12 @@ plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Qu
   box(col="black")
   #
   if (cutoff == FALSE) {
-    tmp <- if (is.na(Xlabel)) {x$PFindex} else {Xlabel};
+    tmp <- if (is.na(Xlabel)) {x$PFStatistic} else {Xlabel};
     mtext(side=1,text=tmp,line=2.5,col="black",cex=1.5,font=1)}
   #
   if (cutoff == TRUE) {
     abline(v=x.line,lwd=2)
-    tmp <- if (is.na(Xlabel)) {paste(x$PFindex," (cutoff=",round(x.line,3),direction,perc.flagged,"%)",sep="")} else {Xlabel};
+    tmp <- if (is.na(Xlabel)) {paste(x$PFStatistic," (cutoff=",round(x.line,3),direction,perc.flagged,"%)",sep="")} else {Xlabel};
     mtext(side=1,text=tmp,line=2.5,col="black",cex=Xcex,font=1) 
   }
   #
@@ -96,10 +96,10 @@ plot.PerFit <- function (x,type="Density",both.scale=TRUE,cutoff=TRUE,method="Qu
 }
 
 flagged.resp <- function(matrix,scores=TRUE,ord=TRUE,x,method="Quantile",Qlvl=.05,Blvl=.05,Breps=1000,UDlvl=NA) { # matrix = score matrix
-  upp.ind <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
-  low.ind <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
-  if (any(x$PFindex == upp.ind)) {flagged.subs <- which(x$PFscores >= cutoff(x,method,Qlvl,Blvl,Breps,UDlvl)$cutoff)};
-  if (any(x$PFindex == low.ind)) {flagged.subs <- which(x$PFscores <= cutoff(x,method,Qlvl,Blvl,Breps,UDlvl)$cutoff)};
+  upp.PFS <- c("Cstar","C.Sato","U3","ZU3","G","Gnormed","Gpoly","Gnormed.poly","U3poly","D.KB");
+  low.PFS <- c("r.pbis","NCI","Ht","A.KB","E.KB","lz","lzstar","lzpoly");
+  if (any(x$PFStatistic == upp.PFS)) {flagged.subs <- which(x$PFscores >= cutoff(x,method,Qlvl,Blvl,Breps,UDlvl)$cutoff)};
+  if (any(x$PFStatistic == low.PFS)) {flagged.subs <- which(x$PFscores <= cutoff(x,method,Qlvl,Blvl,Breps,UDlvl)$cutoff)};
   Ps <- round(apply(matrix,2,mean),3);
   # Not ordered by pvalue:
   if (ord == F) {
@@ -144,7 +144,7 @@ Cstar <- function(matrix){
     den <- sum(pi.ord[1:uniqueNC[i]]) - sum(pi.ord[(I-uniqueNC[i]+1):I]);
     res[Respond.i] <- num/den;
   }
-  res <- list(PFscores=round(res,4),PFindex="Cstar");
+  res <- list(PFscores=round(res,4),PFStatistic="Cstar");
   class(res) <- "PerFit";
   res
 }
@@ -170,7 +170,7 @@ C.Sato <- function(matrix){
     matrix.iORD <- matrix(matrix.i[,order(pi,decreasing=TRUE)],nrow=sum(Respond.i),byrow=FALSE);
     res[Respond.i] <- 1-cov(t(matrix.iORD),pi.ord) / cov(c(rep(1,uniqueNC[i]),rep(0,I-uniqueNC[i])),pi.ord)
   }
-  res <- list(PFscores=round(res,4),PFindex="C.Sato");
+  res <- list(PFscores=round(res,4),PFStatistic="C.Sato");
   class(res) <- "PerFit";
   res
 }
@@ -187,7 +187,7 @@ r.pbis <- function(matrix){
   if (min(uniqueNC)==0 || max(uniqueNC)==I){
     stop('Remove all-0s and/or all-1s response vectors from data.')};
   pi <- apply(matrix,2,mean);
-  ri <- list(PFscores=as.vector(round(apply(matrix,1,function(vect){cor(vect,pi)}),4)),PFindex="r.pbis");
+  ri <- list(PFscores=as.vector(round(apply(matrix,1,function(vect){cor(vect,pi)}),4)),PFStatistic="r.pbis");
   class(ri) <- "PerFit";
   ri
 }
@@ -218,7 +218,7 @@ U3 <- function(matrix){
     den.U3 <- sum(log.odds.ord[1:uniqueNC[i]]) - sum(log.odds.ord[(I-uniqueNC[i]+1):I]);
     res[Respond.i] <- num.U3/den.U3;  
   }
-  res <- list(PFscores=round(res,4),PFindex="U3");
+  res <- list(PFscores=round(res,4),PFStatistic="U3");
   class(res) <- "PerFit";
   res
 }
@@ -252,7 +252,7 @@ ZU3 <- function(matrix){
     den.U3 <- sum(log.odds.ord[1:uniqueNC[i]]) - sum(log.odds.ord[(I-uniqueNC[i]+1):I]);
     res[Respond.i] <- ((num.U3/den.U3) - exp.val) / sqrt(var.val);
   }
-  res <- list(PFscores=round(res,4),PFindex="ZU3");
+  res <- list(PFscores=round(res,4),PFStatistic="ZU3");
   class(res) <- "PerFit";
   res
 }
@@ -275,7 +275,7 @@ G <- function(matrix){
     sum;
   }
   res <- apply(matrix.ord,1,per.row);
-  res <- list(PFscores=as.vector(round(res,4)),PFindex="G");
+  res <- list(PFscores=as.vector(round(res,4)),PFStatistic="G");
   class(res) <- "PerFit";
   res
 }
@@ -283,7 +283,7 @@ G <- function(matrix){
 ########################################################################################
 ########################################################################################
 # Gnormed (van der Flier, 1977; Meijer, 1994):
-# This index is perfectly linearly related to NCI (Tatsuoka & Tatsuoaka, 1982, 1983)
+# This statistic is perfectly linearly related to NCI (Tatsuoka & Tatsuoaka, 1982, 1983)
 # NCI = 1-2Gnormed
 ########################################################################################
 ########################################################################################
@@ -301,7 +301,7 @@ Gnormed <- function(matrix){
       sum/(NC*(I-NC))} else {0} # all-0s or all-1s vector -> Gnormed=0
   }
   res <- apply(matrix.ord,1,per.row);
-  res <- list(PFscores=as.vector(round(res,4)),PFindex="Gnormed");
+  res <- list(PFscores=as.vector(round(res,4)),PFStatistic="Gnormed");
   class(res) <- "PerFit";
   res
 }
@@ -309,7 +309,7 @@ Gnormed <- function(matrix){
 ########################################################################################
 ########################################################################################
 # NCI (Tatsuoka & Tatsuoaka, 1982, 1983):
-# This index is perfectly linearly related to Gnormed (van der Flier, 1977; Meijer, 1994)
+# This statistic is perfectly linearly related to Gnormed (van der Flier, 1977; Meijer, 1994)
 # NCI = 1-2Gnormed
 ########################################################################################
 ########################################################################################
@@ -327,7 +327,7 @@ NCI <- function(matrix){
       1 - 2*sum/(NC*(I-NC))} else {1} # all-0s or all-1s vector -> NCI=1
   }
   res <- apply(matrix.ord,1,per.row);
-  res <- list(PFscores=as.vector(round(res,4)),PFindex="NCI");
+  res <- list(PFscores=as.vector(round(res,4)),PFStatistic="NCI");
   class(res) <- "PerFit";
   res
 }
@@ -359,7 +359,7 @@ Ht <- function(matrix){
   df.ord <- data.frame(df.ord,den);
   df <- df.ord[order(df.ord[,1]),];
   res <- df$num / df$den;
-  res <- list(PFscores=round(res,4),PFindex="Ht");
+  res <- list(PFscores=round(res,4),PFStatistic="Ht");
   class(res) <- "PerFit";
   res
 }
@@ -377,7 +377,7 @@ A.KB <- function(matrix){
     stop('Error: Remove all-0s and/or all-1s response vectors from data before proceeding.')};
   pi <- apply(matrix,2,mean);
   a <- apply(matrix,1,function(vect){vect %*% pi});
-  res <- list(PFscores=as.vector(a),PFindex="A.KB");
+  res <- list(PFscores=as.vector(a),PFStatistic="A.KB");
   class(res) <- "PerFit";
   res
 }
@@ -392,7 +392,7 @@ D.KB <- function(matrix){
   pi.ord <- sort(pi,decreasing=TRUE);
   a <- apply(matrix,1,function(vect){vect %*% pi});
   a.max <- apply(matrix,1,function(vect){sum(pi.ord[1:sum(vect)])});
-  res <- list(PFscores=as.vector(a.max-a),PFindex="D.KB");
+  res <- list(PFscores=as.vector(a.max-a),PFStatistic="D.KB");
   class(res) <- "PerFit";
   res
 }
@@ -407,7 +407,7 @@ E.KB <- function(matrix){
   pi.ord <- sort(pi,decreasing=TRUE);
   a <- apply(matrix,1,function(vect){vect %*% pi});
   a.max <- apply(matrix,1,function(vect){sum(pi.ord[1:sum(vect)])});
-  res <- list(PFscores=as.vector(a/a.max),PFindex="E.KB");
+  res <- list(PFscores=as.vector(a/a.max),PFStatistic="E.KB");
   class(res) <- "PerFit";
   res
 }
@@ -429,7 +429,7 @@ Gpoly <- function(matrix,Ncat) {
   probs.ISD.vect <- as.vector(t(probs.ISD));
   matrix.ISD.ord <- matrix.ISD[,order(probs.ISD.vect,decreasing=TRUE)];
   res <- G(matrix.ISD.ord)$PFscores;
-  res <- list(PFscores=round(res,4),PFindex="Gpoly");
+  res <- list(PFscores=round(res,4),PFStatistic="Gpoly");
   class(res) <- "PerFit";
   res
 }
@@ -456,7 +456,7 @@ Gnormed.poly <- function(matrix,Ncat) {
   maxG <- T - sapply(0:(I*M),function(x) {.5*x*(x+1)});
   maxG[c(1,length(maxG))] <- 1; # so that vectors (0,0,...,0) and (M,M,...,M), which have 0 Guttman errors, are divided by 1 instead of 0
   res <- Gpoly(matrix,Ncat)$PFscores / maxG[NC+1];
-  res <- list(PFscores=round(res,4),PFindex="Gnormed.poly");
+  res <- list(PFscores=round(res,4),PFStatistic="Gnormed.poly");
   class(res) <- "PerFit";
   res
 }
@@ -509,7 +509,7 @@ U3poly <- function(matrix,Ncat) {
   den <- maxW - minW;
   den[c(1,length(den))] <- 1; # so that vectors (0,0,...,0) and (M,M,...,M), which have 0 Guttman errors, are divided by 1 instead of 0
   res <- (maxW[NC+1] - U3poly.W(matrix,Ncat)) / den[NC+1];
-  res <- list(PFscores=round(res,4),PFindex="U3poly");
+  res <- list(PFscores=round(res,4),PFStatistic="U3poly");
   class(res) <- "PerFit";
   res
 }
@@ -537,7 +537,7 @@ lz <- function (matrix,ip=NA,model="2PL",ability=NA,method="ML",mu=0,sigma=1) {
   l0 <- apply(matrix*log(P) + (1-matrix)*log(Q),1,sum);
   El0 <- apply(P*log(P) + Q*log(Q),1,sum);
   Vl0 <- apply(P*Q*(log(P/Q))^2,1,sum);
-  res <- list(PFscores=as.vector(round((l0 - El0) / sqrt(Vl0),4)),PFindex="lz");
+  res <- list(PFscores=as.vector(round((l0 - El0) / sqrt(Vl0),4)),PFStatistic="lz");
   class(res) <- "PerFit";
   res
 }
@@ -569,7 +569,7 @@ lzstar <- function (matrix,ip=NA,model="2PL",method="ML",mu=0,sigma=1) {
   tau2n <- apply((wi.tilde^2)*P*Q,1,sum) / I;
   EWn <- -cn * r0;
   VWn <- I * tau2n;
-  res <- list(PFscores=as.vector(round((Wn - EWn) / sqrt(VWn),4)),PFindex="lzstar");
+  res <- list(PFscores=as.vector(round((Wn - EWn) / sqrt(VWn),4)),PFStatistic="lzstar");
   class(res) <- "PerFit";
   res
 }
@@ -663,7 +663,7 @@ lzpoly <- function (matrix,Ncat,ip=NA,model="GRM",ability=NA,method="EAP") {
     tot
   }
   Vl0p <- apply(P.CRF,1,V.row);  
-  res <- list(PFscores=round((l0p - El0p) / sqrt(Vl0p),4),PFindex="lzpoly");
+  res <- list(PFscores=round((l0p - El0p) / sqrt(Vl0p),4),PFStatistic="lzpoly");
   class(res) <- "PerFit";
   res
   }
