@@ -52,6 +52,9 @@ More person-fit statistics will be added to the package in future updates.
 \item Version 1.1 (May 2014)
 
 Functions \code{plot.PerFit} and \code{PRFplot} now allow the user to edit the axes labels and the titles.
+\item Version 1.2 (August 2014)
+
+Some output values of some functions were renamed for the sake of consistency. The package documentation was adapted accordingly.
 }
 
 }
