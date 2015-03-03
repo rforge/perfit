@@ -1,9 +1,8 @@
 # Compute PRFs for all respondents simultaneously.
 # Also, compute a functional data object with all the PRFs.
 # See: Ramsay, Hooker, & Graves (2009). Functional data analysis with R and Matlab.
-PRF <- function(x, h=.09, N.FPts=101) #x = an object from 'PerFit' class
+PRF <- function(matrix, h=.09, N.FPts=101)
 {
-  matrix      <- x$Matrix
   Diffs       <- 1 - colMeans(matrix)
   focal.pts   <- seq(0, 1, length.out=N.FPts)
   GaussKernel <- function(x) {dnorm(x, mean=0, sd=1)}
@@ -33,19 +32,17 @@ PRF <- function(x, h=.09, N.FPts=101) #x = an object from 'PerFit' class
   list(PRFdiffs=focal.pts, PRFest=PRFest, FDO=fd.obj)
 }
 
-PRF.VarBands <- function (x, h=.09, N.FPts=101, alpha=.05) #x = an object from 'PerFit' class
+PRF.VarBands <- function (matrix, h=.09, N.FPts=101, alpha=.05)
 {
-  matrix    <- x$Matrix
   focal.pts <- seq(0, 1, length.out=N.FPts)
   N         <- dim(matrix)[1]; I <- dim(matrix)[2]
-  PRFscores <- PRF(x, h, N.FPts)$PRFest
+  PRFscores <- PRF(matrix, h, N.FPts)$PRFest
   # Jackknife estimate of the SE:
   PRF.SEarray <- array(NA, c(length(focal.pts), I, N))
-  x.jack      <- x
   for (it in 1:I)
   {
-    x.jack$Matrix       <- matrix[, -it]
-    PRF.SEarray[, it, ] <- PRF(x.jack, h, N.FPts)$PRFest
+    matrix.jack         <- matrix[, -it]
+    PRF.SEarray[, it, ] <- PRF(matrix.jack, h, N.FPts)$PRFest
   }
   PRF.SE <- apply(PRF.SEarray, 3, function(mat)
     {
@@ -73,23 +70,23 @@ PRF.VarBands <- function (x, h=.09, N.FPts=101, alpha=.05) #x = an object from '
        FDO.VarBandsLow=fd.obj.Low, FDO.VarBandsHigh=fd.obj.High)
 }
 
-PRFplot <- function (x, respID, h=.09, N.FPts=101, 
+PRFplot <- function (matrix, respID, h=.09, N.FPts=101, 
                      VarBands=FALSE, VarBands.area=FALSE, alpha=.05,
-                     Xlabel=NA, Xcex=1.5, Ylabel=NA, Ycex=1.5, title=NA, Tcex=1.5)
+                     Xlabel=NA, Xcex=1.5, Ylabel=NA, Ycex=1.5, title=NA, Tcex=1.5, 
+                     NA.method="NPModel", Save.MatImp=FALSE, 
+                     IP=NULL, IRT.PModel="2PL", Ability=NULL, Ability.PModel="ML", mu=0, sigma=1)
 {
-  N <- dim(x$Matrix)[1]; I <- dim(x$Matrix)[2]
-  # Sanity check - Class PerFit:
-  Sanity.cls(x)
+  matrix      <- as.matrix(matrix)
+  N <- dim(matrix)[1]; I <- dim(matrix)[2]
   # Sanity check - Dichotomous data only:
-  dico.PFS <- c("Cstar", "C.Sato", "U3", "ZU3", "G", "Gnormed", "D.KB", "r.pbis", "NCI", "Ht", "A.KB", "E.KB", "lz", "lzstar")
-  poly.PFS <- c("Gpoly", "Gnormed.poly", "U3poly", "lzpoly")
-  if (!(x$PFStatistic %in% dico.PFS))
-  {
-    stop('The person response function is only computed for dichotomous data. Aborted.')
-  }
+  Sanity.dma(matrix, N, I)
   # 
-  res1 <- PRF(x, h, N.FPts)
-  res2 <- PRF.VarBands(x, h, N.FPts, alpha)
+  # Dealing with missing values:
+  res.NA <- MissingValues(matrix, NA.method, Save.MatImp, IP, IRT.PModel, Ability, Ability.PModel, mu, sigma)
+  matrix <- res.NA[[1]]
+  # 
+  res1 <- PRF(matrix, h, N.FPts)
+  res2 <- PRF.VarBands(matrix, h, N.FPts, alpha)
   # 
   basis.bspline    <- create.bspline.basis(rangeval = c(0,1), norder = 4, nbasis = (4 + 9))
   x.values         <- seq(0,1,length.out=N.FPts)

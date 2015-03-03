@@ -134,18 +134,7 @@ flagged.resp(Ht.out, cutoff.obj=Ht.cut, scores=FALSE)
 # Flagged respondents: 30, 37, 46, 49,...
 
 # Plot the person response function of respondent 30 (flagged as aberrant):
-Resp30 <- PRFplot(Ht.out, respID=30)
+Resp30 <- PRFplot(InadequacyData, respID=30)
 # Plot the person response function of respondent 35 (not flagged as aberrant):
-Resp35 <- PRFplot(Ht.out, respID=35)
-
-# Load the physical functioning data (polytomous items scores):
-data(PhysFuncData)
-
-# Compute Gnormed.poly:
-Gnp.out <- Gnormed.poly(PhysFuncData, Ncat=3)
-# Determine which respondents were flagged at 5%:
-flagged.resp(Gnp.out, Blvl=.05)
-
-# Compute lzpoly:
-lzpoly(PhysFuncData, Ncat=3)
+Resp35 <- PRFplot(InadequacyData, respID=35)
 }
