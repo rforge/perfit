@@ -19,11 +19,7 @@ export(A.KB,
  cutoff,
  flagged.resp,
  PerFit,
- plot.PerFit,
- PRFplot,
- print.PerFit,
- summary.PerFit
-)
+ PRFplot)
  
 importFrom(irtoys,est,mlebme,wle)
 importFrom(ltm,gpcm,grm,factor.scores)
@@ -32,6 +28,6 @@ importFrom(Hmisc,rMultinom)
 importFrom(MASS,write.matrix)
 importFrom(fda,create.bspline.basis,eval.basis,fd)
 
-S3method("plot", "PerFit")
-S3method("print", "PerFit")
-S3method("summary", "PerFit")
+S3method(plot, PerFit)
+S3method(print, PerFit)
+S3method(summary, PerFit)
