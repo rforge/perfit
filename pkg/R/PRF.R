@@ -122,26 +122,3 @@ PRFplot <- function (matrix, respID, h=.09, N.FPts=101,
   }
   list(PRF.FDO = res1$FDO, VarBandsLow.FDO = res2$FDO.VarBandsLow,  VarBandsHigh.FDO = res2$FDO.VarBandsHigh)
 }
-
-# # PRF vs PRF.fda:
-# id <- 55
-# p1 <- PRF(x.new,id)
-# p2 <- PRF.fda(x.new)
-# # plot(p2[[3]])
-# p1[[2]] - p2[[2]][,id]
-# 
-# # PRF.VarBands vs PRF.VarBands.fda
-# p1vb <- PRF.VarBands(x.new,id)
-# p2vb <- PRF.VarBands.fda(x.new)
-# # plot(p2vb[[3]])
-# # plot(p2vb[[4]])
-# p1vb[[1]] - p2vb[[1]][,id]
-# p1vb[[2]] - p2vb[[2]][,id]
-# 
-# # PRFplot vs PRFplot.fda
-# PRFplot2(x.new,id, VarBands.area=TRUE)
-# PRFplot.fda(x.new,id, VarBands.area=TRUE)
-# # In the same window:
-# PRFplot2(x,id)
-# par(new=TRUE); PRFplot.fda(x,id)
-# #
