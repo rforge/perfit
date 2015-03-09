@@ -26,7 +26,7 @@ summary.PerFit <- function(object, #object = an object from 'PerFit' class
   
   # Summarize results:
   cat(paste0("\nPFS = ", x$PFStatistic, "\n"))
-  cat(paste0("\nCutoff = ", cutoff.res$Cutoff, " (SE = ", cutoff.res$Cutoff.SE, ").\n"))
+  cat(paste0("Cutoff = ", cutoff.res$Cutoff, " (SE = ", cutoff.res$Cutoff.SE, ").\n"))
   cat(paste0("Tail = ", cutoff.res$Tail, ".\n"))
   cat(paste0("Proportion of flagged respondents = ", cutoff.res$Prop.flagged, ".\n"))
   cat("(N.B.: The cutoff varies each time cutoff() is run due to bootstrapping.)\n\n")

@@ -186,6 +186,8 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     cutoff.CI  <- round(quantile(Bvec, probs=c((1-CIlvl)/2, (1+CIlvl)/2)), 4)
   } else
   { 
+    if (any(x$PFStatistic == upp.PFS)) {tail <- "upper"}
+    if (any(x$PFStatistic == low.PFS)) {tail <- "lower"}
     cutoff.use <- UDlvl
     cutoff.SE  <- NA
     cutoff.CI  <- NA

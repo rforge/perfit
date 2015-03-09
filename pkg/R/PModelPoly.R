@@ -31,5 +31,10 @@ PModel.imputation.poly <- function(matrix, Ncat, save.matImp, ip, model, ability
     matrix.imp[resp, position.NA] <- 
       which(apply(P.CRF.NA,2, function(vect) {rmultinom(1,1,vect)}) == 1, arr.ind=TRUE)[,1] - 1
   }
+  # 
+  if (save.matImp == TRUE)
+  {
+    write.matrix(matrix.imp, file="Datamatrix_imputted.txt", sep=" ")
+  }
   list(matrix.imp, ip, ability, 1)
 }

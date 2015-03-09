@@ -44,7 +44,7 @@ If \code{simplified=FALSE} a list of m \code{PerFit} objects is returned.
 # Load the inadequacy scale data (dichotomous item scores):
 data(InadequacyData)
 
-# Compute the Ht scores:
+# Compute the lzstar, U3, and Ht scores:
 PerFit.PFS(InadequacyData, method=c("lzstar", "U3", "Ht"))
 }
 \keyword{univar}

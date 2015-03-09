@@ -20,6 +20,10 @@ MissingValues <- function(matrix, NAs, Save.MatImp, IP, ParModel, Ability, Metho
     )
   } else
   {
+    if (Save.MatImp == TRUE)
+    {
+      write.matrix(matrix, file="Datamatrix_original.txt", sep=" ")
+    }
     lst <- list(matrix, IP, Ability, 0)
   }
   lst
@@ -41,6 +45,10 @@ MissingValues.poly <- function(matrix, Ncat, NAs, Save.MatImp, IP, ParModel, Abi
     )
   } else
   {
+    if (Save.MatImp == TRUE)
+    {
+      write.matrix(matrix, file="Datamatrix_original.txt", sep=" ")
+    }
     lst <- list(matrix, IP, Ability, 0)
   }
   lst
