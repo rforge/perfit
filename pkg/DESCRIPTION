@@ -8,6 +8,6 @@ Maintainer: Jorge N. Tendeiro <j.n.tendeiro@rug.nl>
 Description: This package contains several person fit indices that allow assessing whether
   individual response patterns to tests or questionnaires are (im)plausible given 
   the other respondents in the sample or a specified Item Response Theory model.
-Imports: irtoys, Matrix, Hmisc, MASS, fda
-Depends: ltm
+Imports: fda, Hmisc, irtoys, MASS, Matrix
+Depends: ltm, mirt
 License: GPL (>=2)

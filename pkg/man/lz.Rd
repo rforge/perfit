@@ -37,7 +37,7 @@ Drasgow et al. (1985) introduced one of the most used person-fit statistics, \co
 
 The computation of \code{lz} requires that both item and ability parameters are available. Function \code{lz} allows to user to enter his/her own item and ability parameter estimates (variables \code{IP} and \code{Ability}, respectively). Alternatively, \code{lz} relies on functions available through the \code{\link{irtoys}} package for estimating the parameters. Specifically, the user can choose one from three possible IRT models to fit the data: \code{IRT.PModel="1PL"}, \code{IRT.PModel="2PL"}, or \code{IRT.PModel="3PL"}. As for estimating the ability parameters there are three possible methods: \code{Ability.PModel="ML"} (maximum likelihood), \code{Ability.PModel="BM"} (Bayes modal), or \code{Ability.PModel="WL"} (weighted likelihood).
 
-It was later observed by several researchers (e.g., Molenaar and Hoijtink, 1990) that the asymptotic approximation only holds when true ability values are used. This limitation was overcome by Snijders (2001), who further developed \code{lz} into the \code{lzstar} statistic. An accessible paper that thoroughly explains the basic principles behind \code{lzstar} is Magis, Raiche, and Beland (2012). It is important to realize that not all item and/or ability estimation procedures can be used when computing \code{lzstar}. In particular, the estimation of the ability parameters is constrained (see Snijders, 2001, Equation 5). The \code{lzstar} algorithm internally estimates the ability parameters accordingly for one of three possible methods: \code{Ability.PModel="ML"} (maximum likelihood), \code{Ability.PModel="BM"} (Bayes modal), or \code{Ability.PModel="WL"} (weighted likelihood), see Magis et al. (2012).
+It was later observed by several researchers (e.g., Molenaar and Hoijtink, 1990) that the asymptotic approximation only holds when true ability values are used. This limitation was overcome by Snijders (2001), who further developed \code{lz} into the \code{lzstar} statistic. An accessible paper that thoroughly explains the basic principles behind \code{lzstar} is Magis, Raiche, and Beland (2012). It is important to realize that not all item and/or ability estimation procedures can be used when computing \code{lzstar}. In particular, the estimation of the ability parameters is constrained (see Snijders, 2001, Equation 5). The \code{lzstar} algorithm internally estimates the ability parameters accordingly for one of three possible methods: \code{Ability.PModel="ML"} (maximum likelihood), \code{Ability.PModel="BM"} (Bayes modal), or \code{Ability.PModel="WL"} (weighted likelihood), see Magis et al. (2012). The user may provide his or her own ability estimates in case they are available by means of other software. In this case it is necessary to specify the method that was used for the estimation (ML, BM, or WL) using the argument \code{Ability.PModel}.
 
 Aberrant response behavior is (potentially) indicated by small values of lz/lzstar (i.e., in the left tail of the sampling distribution).
 
@@ -88,6 +88,12 @@ data(InadequacyData)
 
 # Compute the lz scores using a subsample of the first 200 response vectors:
 lz.out <- lz(InadequacyData[1:200,])
+# Use parameters estimated externally (in this case item parameters estimated by mirt):
+ip.mirt <- mirt(InadequacyData[1:200,], 1)
+ip.mirt <- head(as.matrix(coef(ip.mirt, IRTpars = TRUE, as.data.frame = TRUE)), -2)
+ip.mirt <- matrix(ip.mirt, nrow = 28, byrow = TRUE)
+ip.mirt <- ip.mirt[,1:3]
+lz.out2 <-  lz(InadequacyData[1:200,], IP = ip.mirt)
 
 # Compute the lzstar scores using a subsample of the first 200 response vectors:
 lzstar.out <- lzstar(InadequacyData[1:200,])
