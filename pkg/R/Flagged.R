@@ -14,7 +14,7 @@ flagged.resp <- function(x, #x = an object from 'PerFit' class
   # 
   if (is.null(cutoff.obj))
   {
-    cutoff.res <- cutoff(x, ModelFit, Nreps, IP, IRT.PModel, Ability, Ability.PModel, mu, sigma, Blvl, Breps, UDlvl, CIlvl)
+    cutoff.res <- cutoff(x, ModelFit, Nreps, IP, IRT.PModel, Ability, Ability.PModel, mu, sigma, Blvl, Breps, CIlvl, UDlvl)
   } else
   {
     Sanity.clsPO(cutoff.obj)
