@@ -29,7 +29,7 @@ print.PerFit <- function(x, #x = an object from 'PerFit' class
   # Summarize results:
   flagged.bin <- rep("", N)
   flagged.bin[flagged.res] <- "*"
-  all.PFS <- data.frame(PFS.JK(x), Flagged=flagged.bin)
+  all.PFS <- data.frame(PerFit.SE(x), Flagged=flagged.bin)
   print(all.PFS)
   # 
   cat(paste0("\nPFS = ", x$PFStatistic, "\n"))

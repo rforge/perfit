@@ -1,5 +1,4 @@
 \name{A, D, E statistics}
-\alias{ADE.KB}
 \alias{A.KB}
 \alias{D.KB}
 \alias{E.KB}

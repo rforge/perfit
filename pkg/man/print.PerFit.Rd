@@ -33,7 +33,7 @@
 \details{
 For a given object of class \code{PerFit}, this function displays: 
 \itemize{
-\item A data frame with three columns (\code{PFscores} = scores of the person-fit statistic; \code{SE} = standard errors; \code{Flagged} = flagged respondents are marked with an asterisc). The standard errors are computed by means of jackknife.
+\item A data frame with three columns (\code{PFscores} = scores of the person-fit statistic; \code{PFscores.SE} = standard errors; \code{Flagged} = flagged respondents are marked with an asterisc). The standard errors are computed by means of jackknife.
 \item The PFS used, the cutoff value, the tail of the distribution of the person-fit statistic associated to misfit, the proportion of flagged respondents in the sample, and their row indices.
 }
 }
