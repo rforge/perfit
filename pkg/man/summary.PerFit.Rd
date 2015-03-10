@@ -8,8 +8,8 @@
         ModelFit="NonParametric", Nreps=1000, 
         IP=object$IP, IRT.PModel=object$IRT.PModel, Ability=object$Ability,
         Ability.PModel=object$Ability.PModel, mu=0, sigma=1, 
-        Blvl = 0.05, Breps = 1000, UDlvl = NA, 
-        CIlvl = 0.95, ...)
+        Blvl = 0.05, Breps = 1000, CIlvl = 0.95, 
+        UDlvl = NA, ...)
 }
  
 \arguments{

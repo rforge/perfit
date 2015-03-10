@@ -3,8 +3,8 @@ flagged.resp <- function(x, #x = an object from 'PerFit' class
                          scores=TRUE, ord=TRUE,
                          ModelFit="NonParametric", Nreps=1000, 
                          IP=x$IP, IRT.PModel=x$IRT.PModel, Ability=x$Ability, Ability.PModel=x$Ability.PModel, mu=0, sigma=1, 
-                         Blvl = 0.05, Breps = 1000, UDlvl=NA, 
-                         CIlvl = 0.95)
+                         Blvl = 0.05, Breps = 1000, CIlvl = 0.95, 
+                         UDlvl=NA)
 {
   # Sanity check - Class PerFit:
   Sanity.cls(x)  

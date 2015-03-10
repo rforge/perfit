@@ -8,8 +8,8 @@
        ModelFit="NonParametric", Nreps=1000, 
        IP=x$IP, IRT.PModel=x$IRT.PModel, Ability=x$Ability, 
        Ability.PModel=x$Ability.PModel, mu=0, sigma=1, 
-       Blvl = 0.05, Breps = 1000, UDlvl = NA, 
-       CIlvl = 0.95, 
+       Blvl = 0.05, Breps = 1000, CIlvl = 0.95, 
+       UDlvl = NA, 
        Type="Density", Both.scale=TRUE, Cutoff=TRUE, Cutoff.int=TRUE,
        Flagged.ticks = TRUE, 
        Xlabel=NA, Xcex=1.5, title=NA, Tcex=1.5,
@@ -30,8 +30,8 @@
   \item{sigma}{Standard deviation of the apriori distribution. Only used when \code{method="BM"}. Default is 1.}
   \item{Blvl}{Significance level for bootstrap distribution (value between 0 and 1). Default is 0.05.}
   \item{Breps}{Number of bootstrap resamples. Default is 1000.}
-  \item{UDlvl}{User-defined cutoff level.}
   \item{CIlvl}{Level of bootstrap percentile confidence interval for the cutoff statistic.}
+  \item{UDlvl}{User-defined cutoff level.}
   \item{Type}{Type of plot: \code{"Histogram"}, \code{"Density"} (default), \code{"Both"}.}
   \item{Both.scale}{Logical: Should the y-axis be adjusted so that both the histogram and the density graphics are completely visible? Default is \code{TRUE}.}
   \item{Cutoff}{Logical: Should the estimated cutoff be added to the plot? Default is \code{TRUE}.}

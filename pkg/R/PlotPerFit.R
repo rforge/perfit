@@ -3,8 +3,8 @@ plot.PerFit <- function (x, #x = an object from 'PerFit' class
                          cutoff.obj=NULL, #cutoff.obj = an object from 'PerFit.cutoff' class
                          ModelFit="NonParametric", Nreps=1000, 
                          IP=x$IP, IRT.PModel=x$IRT.PModel, Ability=x$Ability, Ability.PModel=x$Ability.PModel, mu=0, sigma=1, 
-                         Blvl = 0.05, Breps = 1000, UDlvl = NA, 
-                         CIlvl = 0.95, 
+                         Blvl = 0.05, Breps = 1000, CIlvl = 0.95, 
+                         UDlvl = NA, 
                          # 
                          Type="Density", Both.scale=TRUE, Cutoff=TRUE, Cutoff.int=TRUE, Flagged.ticks = TRUE, 
                          Xlabel=NA, Xcex=1.5, title=NA, Tcex=1.5,
