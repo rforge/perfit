@@ -65,7 +65,7 @@ The package underwent a major revision:
 \item Function \code{cutoff} was updated. Now, model-fitting item response patterns are generated in order to find the cutoff value.
 \item Function \code{plot.PerFit} now allows displaying a bootstrap percentile confidence interval for the cutoff statistic, as well as ticks marking the flagged respondents.
 \item Person response functions are now approximated by functional data objects computed by means of the \code{fda} package. The functional data objects are returned to the user.
-\item Standard errors for the person-fit statistics are now available via the \code{summary} method.
+\item Standard errors for the person-fit statistics are now available (see function \code{PerFit.SE}).
 \item Many control checks were added throughout the entire code.
 }
 }
