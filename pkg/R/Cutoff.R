@@ -25,7 +25,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     # Generate model-fitting item score vectors based on a parametric model (1PL, 2PL, or 3PL).
     # 
     # Estimate item parameters if not provided:
-    if (is.na(IRT.PModel)) 
+    if (is.null(IRT.PModel)) 
     {
       IRT.PModel <- "2PL"
     } else
@@ -34,7 +34,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     }
     IP <- estIP(x$Matrix, IP, IRT.PModel)
     # Estimate ability parameters if not provided:
-    if (is.na(Ability.PModel)) 
+    if (is.null(Ability.PModel)) 
     {
       Ability.PModel <- "ML"
     } else
@@ -64,7 +64,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     # Generate model-fitting item score vectors based on a parametric model (PCM, GPCM, or GRM).
     # 
     # Estimate item parameters if not provided:
-    if (is.na(IRT.PModel)) 
+    if (is.null(IRT.PModel)) 
     {
       IRT.PModel <- "GRM"
     } else
@@ -75,7 +75,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     IP     <- IP.res[[1]]
     IP.ltm <- IP.res[[2]]
     # Estimate ability parameters if not provided:
-    if (is.na(Ability.PModel)) 
+    if (is.null(Ability.PModel)) 
     {
       Ability.PModel <- "EAP"
     } else
