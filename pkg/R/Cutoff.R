@@ -32,7 +32,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     {
       Sanity.IPm(IRT.PModel)
     }
-    IP <- estIP(matrix, IP, IRT.PModel)
+    IP <- estIP(x$Matrix, IP, IRT.PModel)
     # Estimate ability parameters if not provided:
     if (is.na(Ability.PModel)) 
     {
@@ -41,7 +41,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     {
       Sanity.Abm(Ability.PModel)
     }
-    Ability <- estAb(matrix, IP, Ability, Ability.PModel, mu, sigma)
+    Ability <- estAb(x$Matrix, IP, Ability, Ability.PModel, mu, sigma)
     #
     Ability.gen <- sample(Ability, size=Nreps, replace=TRUE)
     #
@@ -71,7 +71,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     {
       Sanity.IPm.poly(IRT.PModel)
     }
-    IP.res <- estIP.poly(matrix, Ncat, IP, IRT.PModel)
+    IP.res <- estIP.poly(x$Matrix, Ncat, IP, IRT.PModel)
     IP     <- IP.res[[1]]
     IP.ltm <- IP.res[[2]]
     # Estimate ability parameters if not provided:
@@ -82,7 +82,7 @@ cutoff <- function(x, #x = an object from 'PerFit' class
     {
       Sanity.Abm.poly(Ability.PModel)
     }
-    Ability <- estAb.poly(matrix, IP.ltm, Ability, Ability.PModel)
+    Ability <- estAb.poly(x$Matrix, IP.ltm, Ability, Ability.PModel)
     #
     Ability.gen <- sample(Ability, size=Nreps, replace=TRUE)
     #

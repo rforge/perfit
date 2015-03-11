@@ -122,3 +122,4 @@ PRFplot <- function (matrix, respID, h=.09, N.FPts=101,
   }
   list(PRF.FDO = res1$FDO, VarBandsLow.FDO = res2$FDO.VarBandsLow,  VarBandsHigh.FDO = res2$FDO.VarBandsHigh)
 }
+
