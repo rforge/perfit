@@ -8,7 +8,8 @@ PRFplot(matrix, respID, h=.09, N.FPts=101,
         Xlabel=NA, Xcex=1.5, Ylabel=NA, Ycex=1.5, title=NA, Tcex=1.5,
         NA.method="NPModel", Save.MatImp=FALSE, 
         IP = NULL, IRT.PModel = "2PL", Ability = NULL, Ability.PModel = "ML",
-        mu = 0, sigma = 1)
+        mu = 0, sigma = 1, 
+        message = TRUE)
 }
 
 \arguments{
@@ -37,6 +38,7 @@ PRFplot(matrix, respID, h=.09, N.FPts=101,
   \item{Ability.PModel}{Specify the method to use in order to estimate the latent ability parameters (only if \code{Ability=NULL}). The options available are \code{"ML"} (default), \code{"BM"}, and \code{"WL"}.}
   \item{mu}{Mean of the apriori distribution. Only used when \code{method="BM"}. Default is 0.}
   \item{sigma}{Standard deviation of the apriori distribution. Only used when \code{method="BM"}. Default is 1.}
+  \item{message}{Display prompt message (one per person)? Default is TRUE.}
 }
 
 \details{

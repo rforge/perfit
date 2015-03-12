@@ -45,9 +45,9 @@ PRF.VarBands <- function (matrix, h=.09, N.FPts=101, alpha=.05)
     PRF.SEarray[, it, ] <- PRF(matrix.jack, h, N.FPts)$PRFest
   }
   PRF.SE <- apply(PRF.SEarray, 3, function(mat)
-    {
+  {
     sqrt( ((I-1)/I) * rowSums((mat - rowMeans(mat))^2) )
-    })
+  })
   crit.val         <- qnorm(1-alpha, mean=0, sd=1)
   PRF.VarBandsLow  <- PRFscores-crit.val*PRF.SE
   PRF.VarBandsHigh <- PRFscores+crit.val*PRF.SE
@@ -74,7 +74,8 @@ PRFplot <- function (matrix, respID, h=.09, N.FPts=101,
                      VarBands=FALSE, VarBands.area=FALSE, alpha=.05,
                      Xlabel=NA, Xcex=1.5, Ylabel=NA, Ycex=1.5, title=NA, Tcex=1.5, 
                      NA.method="NPModel", Save.MatImp=FALSE, 
-                     IP=NULL, IRT.PModel="2PL", Ability=NULL, Ability.PModel="ML", mu=0, sigma=1)
+                     IP=NULL, IRT.PModel="2PL", Ability=NULL, Ability.PModel="ML", mu=0, sigma=1, 
+                     message=TRUE)
 {
   matrix      <- as.matrix(matrix)
   N <- dim(matrix)[1]; I <- dim(matrix)[2]
@@ -95,7 +96,10 @@ PRFplot <- function (matrix, respID, h=.09, N.FPts=101,
   PRF.VarBandsHigh <- basis.values %*% res2$FDO.VarBandsHigh$coefs
   for (i in 1:length(respID))
   {
-    readline(prompt=paste0("Respondent ", respID[i], ": Press ENTER."))
+    if (message)
+    {
+      readline(prompt=paste0("Respondent ", respID[i], ": Press ENTER."))
+    }
     par(mar=c(4,4,2,1)+.1, las=1)
     plot(1, type="n", axes=FALSE, ann=FALSE, frame.plot=TRUE, xlim=c(0,1), ylim=c(0,1))
     tmpx <- if (is.na(Xlabel)) {"Item difficulty"} else {Xlabel}
