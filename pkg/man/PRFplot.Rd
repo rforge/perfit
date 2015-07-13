@@ -98,7 +98,7 @@ Ht.flagged <- Ht.flagged$PFSscores[,1]
 # Plot the PRFs of the first three flagged respondents:
 Flagged    <- PRFplot(InadequacyData, respID=Ht.flagged[1:3])
 # Plot the person response function of respondent 35 (not flagged as aberrant):
-NotFlagged <- PRFplot(InadequacyData, respID=35)
+PRFplot(InadequacyData, respID=35)
 # Plot the PRFs of all respondents:
 plot(Flagged$PRF.FDO)
 }

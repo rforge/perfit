@@ -134,6 +134,6 @@ PRFplot <- function (matrix, respID, h=.09, N.FPts=101,
     tmp <- if (is.na(title)) {paste("PRF (respID # ",respID[i],")",sep="")} else {title}
     mtext(side = 3, text = tmp, line = .5, col = "black", cex = Tcex, font = 2)
   }
-  list(PRF.FDO = res1$FDO, VarBandsLow.FDO = res2$FDO.VarBandsLow,  VarBandsHigh.FDO = res2$FDO.VarBandsHigh)
+  invisible(list(PRF.FDO = res1$FDO, VarBandsLow.FDO = res2$FDO.VarBandsLow,  VarBandsHigh.FDO = res2$FDO.VarBandsHigh))
 }
 
