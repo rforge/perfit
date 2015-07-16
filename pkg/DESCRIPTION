@@ -13,5 +13,5 @@ Description: Several person-fit statistics (PFSs) are offered. These statistics 
   agreement/disagreement/dependability statistics, U3, ZU3, NCI, Ht). PFSs suitable to polytomous data include
   extensions of lz, U3, and (normed) number of Guttman errors.
 Imports: fda, Hmisc, irtoys, MASS, Matrix
-Depends: ltm, mirt
+Depends: stats, graphics, ltm, mirt
 License: GPL (>=2)
