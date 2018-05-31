@@ -1,8 +1,8 @@
 Package: PerFit
 Type: Package
 Title: Person Fit
-Version: 1.4.1
-Date: 2016-10-17
+Version: 1.4.2
+Date: 2018-05-31
 Author: Jorge N. Tendeiro
 Maintainer: Jorge N. Tendeiro <j.n.tendeiro@rug.nl>
 Description: Several person-fit statistics (PFSs) are offered. These statistics allow assessing whether
