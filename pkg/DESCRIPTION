@@ -1,8 +1,8 @@
 Package: PerFit
 Type: Package
 Title: Person Fit
-Version: 1.4.2
-Date: 2018-05-31
+Version: 1.4.3
+Date: 2018-10-03
 Author: Jorge N. Tendeiro
 Maintainer: Jorge N. Tendeiro <j.n.tendeiro@rug.nl>
 Description: Several person-fit statistics (PFSs) are offered. These statistics allow assessing whether
@@ -15,3 +15,4 @@ Description: Several person-fit statistics (PFSs) are offered. These statistics 
 Imports: stats, graphics, fda, Hmisc, irtoys, MASS, Matrix
 Depends: ltm, mirt
 License: GPL (>=2)
+RoxygenNote: 6.1.0
